@@ -1,0 +1,40 @@
+.fieldWrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.label {
+  display: block;
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text);
+  margin-bottom: var(--space-2);
+}
+
+.requiredAsterisk {
+  color: var(--color-error);
+  margin-left: var(--space-1);
+}
+
+.control {
+  width: 100%;
+}
+
+.error {
+  display: block;
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-xs);
+  color: var(--color-error);
+  margin-top: var(--space-1);
+  min-height: 18px;
+}
+
+.hint {
+  display: block;
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-xs);
+  color: var(--color-muted);
+  margin-top: var(--space-1);
+}
