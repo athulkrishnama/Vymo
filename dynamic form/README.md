@@ -1,75 +1,62 @@
-# React + TypeScript + Vite
+# Dynamic Lead Form
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modular, config-driven dynamic form application built with React, TypeScript, Vite, and CSS Modules.
 
-Currently, two official plugins are available:
+## Run
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+Build for production:
+```bash
+npm run build
 ```
+
+## Structure
+
+```text
+src/
+├── design-system/
+│   ├── tokens/
+│   │   ├── colors.css
+│   │   ├── spacing.css
+│   │   ├── typography.css
+│   │   └── breakpoints.css
+│   ├── atoms/
+│   │   ├── TextInput/
+│   │   ├── Select/
+│   │   ├── Textarea/
+│   │   ├── Checkbox/
+│   │   └── Button/
+│   └── molecules/
+│       └── Field/
+│
+├── features/
+│   └── lead/
+│       ├── config.ts
+│       ├── types.ts
+│       ├── validation.ts
+│       ├── LeadForm.tsx
+│       ├── LeadForm.module.css
+│       └── LeadPage.tsx
+│
+├── App.tsx
+└── main.tsx
+```
+
+## Architecture
+
+- **Configuration (`src/features/lead/config.ts`)**: Defines the form fields, labels, layout types (`default` or `full`), conditional visibility rules (`visibleWhen`), and validation rules. Adding or modifying a field only requires editing this config.
+- **Pure Validation Engine (`src/features/lead/validation.ts`)**: Framework-agnostic validation layer checking required, email, 10-digit phone number, and maxLength rules. Visibility evaluation (`isFieldVisible`) skips hidden fields from both rendering and validation.
+- **Design System (`src/design-system/`)**:
+  - `tokens/`: Centralized CSS variables for colors, typography, spacing, and breakpoints.
+  - `atoms/`: Dumb presentational components (`TextInput`, `Select`, `Textarea`, `Checkbox`, `Button`) without business or validation logic.
+  - `molecules/`: Reusable `Field` molecule standardizing label, required indicator, control container, hint, and error message rendering.
+- **Dynamic Form Renderer (`src/features/lead/LeadForm.tsx`)**: Maps config fields to atoms, manages form state (`values`, `errors`, `touched`), dynamically evaluates conditional visibility, and displays submitted payload upon success.
+
+## Responsive Layout
+
+- Desktop uses a 2-column CSS Grid (`grid-template-columns: repeat(2, minmax(0, 1fr))`) with full-width spans for textarea, consent, and submit container.
+- Mobile (< 768px) switches to a single-column grid with a sticky bottom submit bar for mobile accessibility.
