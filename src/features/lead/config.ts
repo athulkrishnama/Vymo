@@ -5,7 +5,7 @@ export const leadFormConfig: FieldConfig[] = [
     name: "fullName",
     type: "text",
     label: "Full name",
-    placeholder: "e.g. Jane Doe",
+    placeholder: "e.g. Rahul Sharma",
     validations: [
       { type: "required", message: "Full name is required" }
     ]
@@ -14,7 +14,7 @@ export const leadFormConfig: FieldConfig[] = [
     name: "email",
     type: "email",
     label: "Email address",
-    placeholder: "e.g. jane@example.com",
+    placeholder: "e.g. rahul.sharma@example.com",
     validations: [
       { type: "required", message: "Email is required" },
       { type: "email", message: "Please enter a valid email address" }
@@ -36,7 +36,7 @@ export const leadFormConfig: FieldConfig[] = [
     name: "companyName",
     type: "text",
     label: "Company name",
-    placeholder: "e.g. Acme Industries",
+    placeholder: "e.g. Tata Consultancy Services",
     visibleWhen: {
       field: "leadType",
       equals: "company"
