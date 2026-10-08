@@ -1,4 +1,4 @@
-                                                                                                                                            import type { FieldConfig, FormValues } from "./types";
+import type { FieldConfig, FormValues } from "./types";
 
 export const leadFormConfig: FieldConfig[] = [
   {
@@ -12,7 +12,7 @@ export const leadFormConfig: FieldConfig[] = [
   },
   {
     name: "email",
-    type: "email",                                                                                                                                                                          
+    type: "email",
     label: "Email address",
     placeholder: "e.g. jane@example.com",
     validations: [
@@ -52,7 +52,7 @@ export const leadFormConfig: FieldConfig[] = [
     placeholder: "e.g. 9876543210",
     validations: [
       { type: "required", message: "Phone number is required" },
-      { type: "phone", message: "Phone number must contain exactly 10 digits" }
+      { type: "phone", message: "Phone must contain 10 digits" }
     ]
   },
   {
