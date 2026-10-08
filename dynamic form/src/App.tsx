@@ -1,10 +1,7 @@
-import './App.css'
+import { LeadPage } from "./features/lead/LeadPage";
 
 function App() {
-
-  return (
-    <></>
-  )
+  return <LeadPage />;
 }
 
-export default App
+export default App;
